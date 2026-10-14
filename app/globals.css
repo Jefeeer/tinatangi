@@ -1,26 +1,512 @@
-@import "tailwindcss";
+@layer theme, base, components, app, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Liwanag: one day in the garden. Tokens come from the logo and the photos. */
+@theme {
+  --color-espresso: #2a140c;
+  --color-roast: #3f1f13;
+  --color-night: #170d08;
+  --color-marigold: #f2a31b;
+  --color-marigold-deep: #9a5b00;
+  --color-latte: #d8c7a6;
+  --color-sunwash: #fbebc8;
+  --color-golden: #e8a03a;
+  --color-plate: #f7f9fc;
+  --color-delft: #1f3fa8;
+  --color-fern: #1e3a26;
+  --color-glow: #ffd98a;
+  --color-ink-on-dark: #f6ead2;
+
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-rise: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  overflow-x: clip;
+  scroll-padding-top: 72px;
+  -webkit-text-size-adjust: 100%;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: clip;
+  background: var(--color-night);
+  color: var(--color-espresso);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+/* Grounds: each section is a solid colour with a fixed text colour, so contrast is guaranteed. */
+.on-light {
+  --focus: var(--color-delft);
+  --btn-bg: var(--color-espresso);
+  --btn-fg: var(--color-sunwash);
+  --btn-hover: var(--color-roast);
+  --link: var(--color-delft);
+}
+.on-dark {
+  --focus: var(--color-marigold);
+  --btn-bg: var(--color-marigold);
+  --btn-fg: var(--color-espresso);
+  --btn-hover: var(--color-glow);
+  --link: var(--color-glow);
+}
+.on-golden {
+  --link: var(--color-espresso);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus, var(--color-marigold));
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  left: 12px;
+  top: -80px;
+  z-index: 100;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: var(--color-marigold);
+  color: var(--color-espresso);
+  font-weight: 700;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+@layer app {
+/* Type: one family (Figtree). Hierarchy is weight, size and tracking. */
+.t-h1 {
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+.t-h2 {
+  font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  max-width: 30ch;
+}
+.t-h3 {
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+.t-lead {
+  font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
+  line-height: 1.55;
+}
+.t-small {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+.measure {
+  max-width: 62ch;
+}
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Time tag above each section heading (the real sequence on this page is clock time) */
+.time-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 14px;
+}
+.time-tag::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1;
+  text-decoration: none;
+  background: var(--btn-bg, var(--color-marigold));
+  color: var(--btn-fg, var(--color-espresso));
+  transition: background-color 0.2s, color 0.2s;
+}
+.btn:hover {
+  background: var(--btn-hover, var(--color-glow));
+}
+.btn-lg {
+  min-height: 56px;
+  padding: 0 30px;
+  font-size: 1.0625rem;
+}
+.btn-ghost {
+  background: transparent;
+  color: inherit;
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+.btn-ghost:hover {
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+.link {
+  color: var(--link, currentColor);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+  font-weight: 600;
+}
+.link:hover {
+  text-decoration-thickness: 3px;
+}
+
+/* Seams: each section opens with a soft gradient from the previous ground, no hard edges */
+.seam {
+  position: relative;
+  isolation: isolate;
+}
+.seam::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 96px;
+  background: linear-gradient(var(--from), var(--to));
+  z-index: -1;
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .seam::before {
+    height: 160px;
+  }
+}
+
+/* Header: transparent on the hero, then the colour of whichever section is under it */
+.site-header {
+  --hdr-bg: transparent;
+  --hdr-fg: var(--color-ink-on-dark);
+  background: var(--hdr-bg);
+  color: var(--hdr-fg);
+  transition: background-color 0.4s, color 0.4s;
+}
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -24px 0;
+  background: linear-gradient(rgba(23, 13, 8, 0.6), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+  z-index: -1;
+}
+html:not([data-section]) .site-header::before,
+html[data-section="hero"] .site-header::before {
+  opacity: 1;
+}
+html[data-section="kape"] .site-header {
+  --hdr-bg: var(--color-sunwash);
+  --hdr-fg: var(--color-espresso);
+}
+html[data-section="menu"] .site-header {
+  --hdr-bg: var(--color-plate);
+  --hdr-fg: var(--color-espresso);
+}
+html[data-section="hardin"] .site-header {
+  --hdr-bg: var(--color-golden);
+  --hdr-fg: var(--color-espresso);
+}
+html[data-section="gabi"] .site-header,
+html[data-section="bisita"] .site-header {
+  --hdr-bg: var(--color-night);
+  --hdr-fg: var(--color-ink-on-dark);
+}
+html[data-section="kape"] .site-header,
+html[data-section="menu"] .site-header,
+html[data-section="hardin"] .site-header {
+  --focus: var(--color-delft);
+  --btn-bg: var(--color-espresso);
+  --btn-fg: var(--color-sunwash);
+  --btn-hover: var(--color-roast);
+}
+html[data-section="kape"] .site-header,
+html[data-section="menu"] .site-header {
+  --focus: var(--color-delft);
+}
+html[data-section="hardin"] .site-header {
+  --focus: var(--color-espresso);
+}
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 4px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+  transition: text-decoration-color 0.2s;
+}
+.nav-link:hover,
+.nav-link[aria-current="true"] {
+  text-decoration-color: currentColor;
+}
+
+/* Clock chip: hidden in the hero, shown as soon as the day starts */
+.day-chip {
+  display: none;
+}
+@media (min-width: 768px) {
+  html[data-section]:not([data-section="hero"]) .day-chip {
+    display: inline-flex;
+  }
+}
+
+/* Mobile bottom bar: after the hero, hidden once Bisita's own CTAs are on screen */
+.bottom-bar {
+  transform: translateY(110%);
+  transition: transform 0.35s var(--ease-rise);
+}
+html[data-section]:not([data-section="hero"]):not([data-section="bisita"]) .bottom-bar {
+  transform: none;
+}
+
+/* Hero wipe: dusk (B) revealed by a growing circle from the bottom centre */
+.hero {
+  height: 220svh;
+  --r: 0px;
+  --ring: 0;
+}
+.hero-b {
+  -webkit-mask-image: radial-gradient(circle at 50% 100%, #000 calc(var(--r) - 48px), transparent var(--r));
+  mask-image: radial-gradient(circle at 50% 100%, #000 calc(var(--r) - 48px), transparent var(--r));
+}
+.hero-ring {
+  opacity: var(--ring);
+  background: radial-gradient(
+    circle at 50% 100%,
+    transparent calc(var(--r) - 90px),
+    rgba(255, 217, 138, 0.38) calc(var(--r) - 24px),
+    transparent calc(var(--r) + 36px)
+  );
+  mix-blend-mode: screen;
+}
+.hero-chip-night {
+  opacity: var(--chip-night, 0);
+}
+.hero-in {
+  animation: heroIn 1.4s ease-out both;
+}
+@keyframes heroIn {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+.rise-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.rise-inner {
+  display: block;
+}
+.rise-load .rise-inner {
+  animation: rise 0.7s var(--ease-rise) both;
+}
+.rise-load:nth-child(2) .rise-inner {
+  animation-delay: 0.1s;
+}
+.rise-armed .rise-inner {
+  transform: translateY(105%);
+}
+.rise-armed.rise-in .rise-inner {
+  transform: none;
+  transition: transform 0.7s var(--ease-rise);
+}
+
+/* Fairy lights */
+.lights {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 190px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: var(--lights, 0);
+}
+.lights-bottom {
+  inset: auto 0 0 0;
+  transform: scaleY(-1);
+}
+.light-dot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: var(--color-glow);
+  box-shadow: 0 0 12px 4px rgba(255, 217, 138, 0.55);
+  animation: twinkle var(--dur, 4s) ease-in-out var(--delay, 0s) infinite;
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+@media (max-width: 767px) {
+  .light-dot[data-extra] {
+    display: none;
+  }
+}
+
+/* Plate pattern: the one decorative motif. Bands, plate rims and panel edges only. */
+.plate-band {
+  height: 14px;
+  background: url("/brand/plate-band.svg") repeat-x left center / auto 14px;
+}
+.plate-rim {
+  border-radius: 50%;
+  padding: 14px;
+  background: url("/brand/plate-tile.svg") center / 96px 96px;
+  box-shadow: 0 14px 40px rgba(42, 20, 12, 0.18);
+}
+.plate-edge {
+  border: 14px solid transparent;
+  border-image: url("/brand/plate-tile.svg") 28 round;
+}
+
+/* Rails: native scroll-snap, hidden scrollbar */
+.rail {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+.rail {
+  scroll-padding-inline: 16px;
+}
+@media (min-width: 768px) {
+  .rail {
+    scroll-padding-inline: 32px;
+  }
+}
+.rail > * {
+  scroll-snap-align: start;
+  flex: none;
+}
+
+/* Photobooth flash */
+.flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+}
+.flash[data-fire="true"] {
+  animation: flash 0.28s ease-out;
+}
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.sr-only-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Reduced motion: no smooth scroll, static dusk hero, still lights, instant swaps */
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    height: 100svh;
+    --r: 3000px;
+  }
+  .hero-ring {
+    display: none;
+  }
+  .hero-chip-night {
+    opacity: 1;
+  }
+  .hero-in,
+  .rise-load .rise-inner {
+    animation: none;
+  }
+  .rise-armed .rise-inner {
+    transform: none;
+  }
+  .lights {
+    opacity: 0.85 !important;
+  }
+  .light-dot {
+    animation: none;
+  }
+  .flash[data-fire="true"] {
+    animation: none;
+  }
+  .bottom-bar,
+  .site-header,
+  .site-header::before {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
 }

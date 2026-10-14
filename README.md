@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tinatangi Cafe
 
-## Getting Started
+Spec landing page for Tinatangi Cafe (Salawag, Dasmariñas, Cavite). Concept "Liwanag": one day in the garden, scrolled (morning facade wiped to dusk, a clock that runs 7:00 AM to 12:00 MN, fairy lights that come on at night). Built by Aurevixa Technologies. Next.js 16, React 19, Tailwind 4, Motion, Lenis. One font family (Figtree).
 
-First, run the development server:
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build && npm start
+npm run lint
+npm run typecheck
+npm test           # open/closed logic (Asia/Manila) + AA contrast of every colour pair
+npm run screens    # puppeteer screenshots into .screens/ (needs the dev server on :3000)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+See `.env.example`. `NEXT_PUBLIC_SITE_URL` sets canonical/OG/sitemap URLs. `NEXT_PUBLIC_ALLOW_INDEXING=true` lifts the default noindex (this is a concept preview) at launch.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Editing content
 
-## Learn More
+All owner-editable data is in `content/`, shaped like future Supabase tables:
 
-To learn more about Next.js, take a look at the following resources:
+| File | Future table |
+|---|---|
+| `content/site.ts` | `site_settings` + `copy` (contact details, links, rating, every headline and paragraph) |
+| `content/menu.ts` | `menu_categories`, `menu_items`, price-less lists |
+| `content/hours.ts` | `opening_hours` (one row per weekday; drives the live Open/Closed badge and JSON-LD) |
+| `content/gallery.ts` | `gallery_photos` (path, size, alt, caption) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Unknown contact details are `null` in `site.ts` (phone, Messenger, email); their buttons stay hidden until filled in. "Message us" falls back to the Facebook page.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Assets
 
-## Deploy on Vercel
+`scripts/process-logo.mjs` makes the transparent badge and the traced Baybayin mark from the source logo; `scripts/make-assets.mjs` makes the OG image and icons. Photos came from public listings: replace with the owner's originals before launch.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Not deployed. When approved: create the repo, import into Vercel, set the env vars above.
