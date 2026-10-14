@@ -456,16 +456,6 @@ html[data-section]:not([data-section="hero"]):not([data-section="bisita"]) .bott
       opacity 0.6s ease-out var(--rv-delay, 0ms),
       transform 0.9s cubic-bezier(0.34, 1.4, 0.5, 1) var(--rv-delay, 0ms);
   }
-  /* Gabi rail drift: --dp (0..1) is written from scroll; travel is small and only ever leftward */
-  .rail-drift > * {
-    --drift-max: 14px;
-    transform: translate3d(calc(var(--dp, 0) * var(--drift-max) * var(--k, 1) * -1), 0, 0);
-  }
-  @media (min-width: 768px) {
-    .rail-drift > * {
-      --drift-max: 30px;
-    }
-  }
 }
 
 /* Fairy lights */
@@ -564,6 +554,43 @@ html[data-section]:not([data-section="hero"]):not([data-section="bisita"]) .bott
 .rail > * {
   scroll-snap-align: start;
   flex: none;
+}
+
+/* Gabi photo marquee: two copies of the set, the track slides by one set (-50%) and loops */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-dur, 36s) linear infinite;
+}
+.marquee-item {
+  flex: none;
+  padding-inline-end: 16px;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  .marquee-item[aria-hidden] {
+    display: none;
+  }
 }
 
 /* Soft fade where a rail runs off the page edge, so it never looks sliced */
