@@ -8,7 +8,7 @@ export function Footer() {
     <footer className="on-dark relative overflow-hidden bg-night pb-28 pt-4 text-ink-on-dark md:pb-10">
       <Baybayin className="pointer-events-none absolute -bottom-10 right-[-4%] w-[60vw] max-w-[560px] text-marigold opacity-[0.05]" />
       <div className="relative mx-auto max-w-7xl px-4 md:px-8">
-        <div className="flex flex-col gap-8 border-t border-ink-on-dark/15 pt-10 md:flex-row md:items-center md:justify-between">
+        <div data-reveal className="flex flex-col gap-8 border-t border-ink-on-dark/15 pt-10 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-5">
             <Image src="/brand/badge.png" alt={site.name} width={480} height={612} sizes="56px" className="h-16 w-auto" />
             <div>
@@ -24,7 +24,7 @@ export function Footer() {
             ))}
           </nav>
         </div>
-        <div className="mt-10 flex flex-col gap-2 text-[0.9375rem] text-latte md:flex-row md:justify-between">
+        <div data-reveal className="mt-10 flex flex-col gap-2 text-[0.9375rem] text-latte md:flex-row md:justify-between">
           <p>
             &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>

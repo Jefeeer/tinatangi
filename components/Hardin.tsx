@@ -20,14 +20,14 @@ export function Hardin() {
           className="aspect-[4/5] rounded-card bg-roast lg:col-span-7 lg:aspect-[6/7]"
         />
         <div className="lg:col-span-5">
-          <p className="time-tag">{copy.hardin.time}</p>
+          <p data-reveal className="time-tag">{copy.hardin.time}</p>
           <Rise id="hardin-h" className="t-h2">
             {copy.hardin.h2}
           </Rise>
-          <p className="t-lead measure mt-5">{copy.hardin.body}</p>
+          <p data-reveal className="t-lead measure mt-5">{copy.hardin.body}</p>
           <ul className="mt-8 border-t border-delft/70">
             {copy.hardin.facts.map((f) => (
-              <li key={f} className="border-b border-delft/70 py-4 text-[1.125rem] font-semibold">
+              <li key={f} data-reveal className="border-b border-delft/70 py-4 text-[1.125rem] font-semibold">
                 {f}
               </li>
             ))}

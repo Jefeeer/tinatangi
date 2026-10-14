@@ -1,4 +1,5 @@
 // Menu data, shaped like future `menu_categories` + `menu_items` tables.
+// TO CONFIRM: menu freshness ("last checked" date) with the owner before launch; it is not shown on the page.
 // Prices (PHP) come from the menu page in research.md. Drinks and desserts have no known prices, so none are shown.
 
 export type MenuItem = { id: string; name: string; price: number; description: string };

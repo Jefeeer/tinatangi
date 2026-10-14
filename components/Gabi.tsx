@@ -17,11 +17,11 @@ export function Gabi() {
       <FairyLights count={36} strings={3} seed={3} className="z-0" />
       <div className="relative z-10">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
-          <p className="time-tag text-glow">{copy.gabi.time}</p>
+          <p data-reveal className="time-tag text-glow">{copy.gabi.time}</p>
           <Rise id="gabi-h" className="t-h2">
             {copy.gabi.h2}
           </Rise>
-          <p className="t-lead measure mt-5 text-ink-on-dark">{copy.gabi.body}</p>
+          <p data-reveal className="t-lead measure mt-5 text-ink-on-dark">{copy.gabi.body}</p>
         </div>
 
         <div className="mt-12 md:mt-16">
@@ -33,7 +33,7 @@ export function Gabi() {
         </div>
 
         <div className="mx-auto mt-20 max-w-7xl px-4 md:mt-28 md:px-8">
-          <div className="bg-roast">
+          <div data-reveal className="bg-roast">
             <div className="plate-band" aria-hidden="true" />
             <div className="flex flex-col gap-6 px-6 py-10 md:flex-row md:items-center md:justify-between md:px-12 md:py-12">
               <div>

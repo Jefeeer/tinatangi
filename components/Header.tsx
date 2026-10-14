@@ -6,6 +6,7 @@ import { copy, messageUrl, site } from "@/content/site";
 import { Baybayin } from "./Baybayin";
 import { DayClock } from "./DayClock";
 import { OpenBadge } from "./OpenBadge";
+import { scrollToId } from "@/lib/lenis";
 import { setScrollLock } from "./SmoothScroll";
 
 /** The real time each section sits at on the day clock, read from the section copy. */
@@ -58,13 +59,13 @@ export function Header() {
   const go = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     setOpen(false);
-    window.setTimeout(() => document.getElementById(id)?.scrollIntoView({ block: "start" }), 60);
+    window.setTimeout(() => scrollToId(id), 60);
   };
 
   return (
     <header className="site-header fixed inset-x-0 top-0 z-50">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 md:h-[72px] md:px-8">
-        <a href="#top" className="flex shrink-0 items-center" aria-label={`${site.name}, back to top`}>
+        <a href="#top" className="flex min-h-12 min-w-11 shrink-0 items-center justify-center" aria-label={`${site.name}, back to top`}>
           <Image src="/brand/badge.png" alt="" width={480} height={612} sizes="40px" className="h-12 w-auto" preload />
         </a>
 

@@ -9,6 +9,7 @@ import { Hero } from "@/components/Hero";
 import { JsonLd } from "@/components/JsonLd";
 import { Kape } from "@/components/Kape";
 import { Menu } from "@/components/Menu";
+import RevealEngine from "@/components/RevealEngine";
 import SmoothScroll from "@/components/SmoothScroll";
 
 export default function Home() {
@@ -30,6 +31,7 @@ export default function Home() {
       <Footer />
       <BottomBar />
       <SmoothScroll />
+      <RevealEngine />
       <DayEngine />
       <JsonLd />
     </>

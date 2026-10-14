@@ -13,7 +13,7 @@ export function ParallaxPhoto({ photo, sizes, className = "", position = "50% 50
   const y = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
 
   return (
-    <div ref={ref} className={`relative overflow-hidden ${className}`}>
+    <div ref={ref} data-reveal="photo" className={`relative overflow-hidden ${className}`}>
       <motion.div className="absolute inset-0 scale-[1.1]" style={reduce ? undefined : { y }}>
         <Photo photo={photo} sizes={sizes} style={{ objectPosition: position }} />
       </motion.div>

@@ -31,7 +31,7 @@ export function DayClock({ className = "" }: { className?: string }) {
   return (
     <span
       aria-hidden="true"
-      className={`day-chip items-center gap-2 rounded-full px-3 py-1 text-[0.9375rem] font-semibold tabular ring-1 ring-current/40 ${className}`}
+      className={`day-chip items-center whitespace-nowrap gap-2 rounded-full px-3 py-1 text-[0.9375rem] font-semibold tabular ring-1 ring-current/40 ${className}`}
     >
       <span className="h-2.5 w-2.5 rounded-full" style={{ background: c, boxShadow: `0 0 8px ${c}` }} />
       {formatDayMinutes(m)}

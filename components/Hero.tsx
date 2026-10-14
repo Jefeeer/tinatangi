@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { photos } from "@/content/gallery";
 import { copy, site } from "@/content/site";
@@ -49,46 +49,51 @@ export function Hero() {
       <div className="sticky top-0 h-svh overflow-hidden bg-night text-ink-on-dark">
         <div className="hero-in absolute inset-0">
           <div className="hero-a absolute inset-0">
-            <Photo photo={photos.facadeDay} alt={copy.hero.morningAlt} sizes="100vw" preload className="object-[62%_45%] md:object-[50%_40%]" />
+            <Photo photo={photos.facadeDay} alt={copy.hero.morningAlt} sizes="100vw" preload className="object-[62%_45%] max-[359px]:object-[62%_28%] md:object-[50%_40%]" />
           </div>
           <div className="hero-dim absolute inset-0" aria-hidden="true" />
         </div>
         <div className="hero-mask absolute inset-0">
           <div className="hero-b absolute inset-0">
-            <Photo photo={photos.duskCounter} alt={copy.hero.nightAlt} sizes="100vw" preload className="object-[50%_55%]" />
+            <Photo photo={photos.duskCounter} alt={copy.hero.nightAlt} sizes="100vw" className="object-[50%_55%]" />
           </div>
         </div>
         <div className="hero-ring absolute inset-0" aria-hidden="true" />
-        <div className="absolute inset-0 bg-gradient-to-t from-espresso/90 via-espresso/45 to-transparent to-55%" aria-hidden="true" />
+        <div className="hero-stage-scrim absolute inset-0 bg-gradient-to-t from-espresso/90 via-espresso/45 to-transparent to-55%" aria-hidden="true" />
         <Baybayin className="absolute -right-6 top-20 w-[62vw] max-w-[620px] text-marigold opacity-[0.06] md:right-6 md:top-24" />
 
-        <div className="absolute inset-x-0 bottom-0 mx-auto flex max-w-7xl flex-col gap-5 px-4 pb-8 md:px-8 md:pb-12">
+        <div className="hero-text absolute inset-x-0 bottom-0 mx-auto flex max-w-7xl flex-col gap-5 px-4 pb-8 md:px-8 md:pb-12">
           <h1 className="t-h1">
-            {copy.hero.h1.map((line) => (
-              <span key={line} className="rise-mask rise-load">
-                <span className="rise-inner">{line}</span>
-              </span>
+            {copy.hero.h1.map((line, i) => (
+              <Fragment key={line}>
+                {i > 0 ? " " : null}
+                <span className="rise-mask rise-load">
+                  <span className="rise-inner">{line}</span>
+                </span>
+              </Fragment>
             ))}
           </h1>
-          <p className="t-lead max-w-[46ch] text-ink-on-dark">{nb(copy.hero.lead)}</p>
+          <p className="hero-lead t-lead max-w-[46ch] text-ink-on-dark">{nb(copy.hero.lead)}</p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-            <a href={site.links.directions} target="_blank" rel="noopener noreferrer" className="btn btn-lg">
+            <a href={site.links.directions} target="_blank" rel="noopener noreferrer" className="btn btn-lg whitespace-nowrap">
               {copy.buttons.directions}
             </a>
             <a href="#menu" className="link text-ink-on-dark">
               {copy.buttons.seeMenu}
             </a>
           </div>
-          <div className="flex items-end justify-between gap-3 pt-2">
-            <span className="rounded-full bg-night/70 px-4 py-2 text-[0.9375rem] font-semibold text-ink-on-dark ring-1 ring-ink-on-dark/25 backdrop-blur-sm">
-              {copy.hero.chipMorning}
+          <div className="hero-chips flex items-end justify-between gap-3 pt-2">
+            <span className="whitespace-nowrap rounded-full bg-night/70 px-4 py-2 text-[0.9375rem] font-semibold text-ink-on-dark ring-1 ring-ink-on-dark/25 backdrop-blur-sm">
+              <span className="min-[360px]:hidden">{copy.hero.chipMorningShort}</span>
+              <span className="hidden min-[360px]:inline">{copy.hero.chipMorning}</span>
             </span>
             <span className="hidden items-center gap-3 text-[0.9375rem] text-ink-on-dark/90 md:flex" aria-hidden="true">
               <span className="block h-px w-12 bg-ink-on-dark/60" />
               {copy.hero.cue}
             </span>
-            <span className="hero-chip-night rounded-full bg-night/70 px-4 py-2 text-[0.9375rem] font-semibold text-ink-on-dark ring-1 ring-ink-on-dark/25 backdrop-blur-sm">
-              {copy.hero.chipNight}
+            <span className="hero-chip-night whitespace-nowrap rounded-full bg-night/70 px-4 py-2 text-[0.9375rem] font-semibold text-ink-on-dark ring-1 ring-ink-on-dark/25 backdrop-blur-sm">
+              <span className="min-[360px]:hidden">{copy.hero.chipNightShort}</span>
+              <span className="hidden min-[360px]:inline">{copy.hero.chipNight}</span>
             </span>
           </div>
         </div>

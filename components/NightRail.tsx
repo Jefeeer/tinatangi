@@ -1,12 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
 import type { Photo as PhotoData } from "@/content/gallery";
 import { Photo } from "./Photo";
 
 /** Full-bleed horizontal rail. Native scroll-snap and swipe; prev/next buttons for keyboard and mouse. */
 export function NightRail({ items, label }: { items: readonly PhotoData[]; label: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  const wrap = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: wrap, offset: ["start end", "end start"] });
+  // the photos drift a little left as the rail scrolls past (CSS var only, no re-render)
+  useMotionValueEvent(scrollYProgress, "change", (v) => ref.current?.style.setProperty("--dp", v.toFixed(3)));
   const [edge, setEdge] = useState({ start: true, end: false });
 
   useEffect(() => {
@@ -32,14 +38,14 @@ export function NightRail({ items, label }: { items: readonly PhotoData[]; label
   };
 
   return (
-    <div>
-      <div ref={ref} role="region" aria-label={label} tabIndex={0} data-lenis-prevent-wheel className="rail px-4 pb-4 md:px-8">
-        {items.map((p) => (
-          <figure key={p.id} className="w-[78vw] max-w-[460px] md:w-[38vw]">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-card bg-roast">
+    <div ref={wrap}>
+      <div ref={ref} role="region" aria-label={label} tabIndex={0} data-lenis-prevent-wheel className={`rail px-4 pb-4 md:px-8 ${reduce ? "" : "rail-drift"}`}>
+        {items.map((p, i) => (
+          <figure key={p.id} className="w-[78vw] max-w-[460px] md:w-[38vw]" style={{ ["--k" as string]: 0.7 + (i % 3) * 0.3 }}>
+            <div data-reveal="photo" className="relative aspect-[4/5] overflow-hidden rounded-card bg-roast">
               <Photo photo={p} sizes="(min-width:768px) 38vw, 78vw" />
             </div>
-            <figcaption className="t-small mt-3 text-ink-on-dark/90">{p.caption}</figcaption>
+            <figcaption data-reveal className="t-small mt-3 text-ink-on-dark/90">{p.caption}</figcaption>
           </figure>
         ))}
       </div>

@@ -37,8 +37,8 @@ export function OpenBadge({ size = "sm", compactLabel, className = "" }: { size?
       <span aria-hidden="true" className="inline-block h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: dot, boxShadow: `0 0 8px ${dot}` }} />
       {compactLabel ? (
         <>
-          <span className="sm:hidden">{short}</span>
-          <span className="hidden sm:inline">{text}</span>
+          <span className="lg:hidden">{short}</span>
+          <span className="hidden lg:inline">{text}</span>
         </>
       ) : (
         <span>{text}</span>

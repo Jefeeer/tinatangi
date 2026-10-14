@@ -72,6 +72,8 @@ export const copy = {
     lead: "Coffee, good food and fairy lights under the trees. Open daily, 7 AM to midnight.",
     chipMorning: "7:00 AM, bukas na",
     chipNight: "Hanggang 12:00 MN",
+    chipMorningShort: "7:00 AM",
+    chipNightShort: "12:00 MN",
     cue: "Mag-scroll para gumabi",
     morningAlt: "Ribbed-wood facade of Tinatangi Cafe in morning sun, with palms and potted plants",
     nightAlt: "Tinatangi Cafe's two-storey open counter and rooftop deck under trees wrapped in fairy lights at dusk",
@@ -89,7 +91,7 @@ export const copy = {
     h2: "Tanghalian sa hardin.",
     intro: "From soup to bagnet, plated on our blue-and-white dishes.",
     cardHeader: "Menu. Prices in pesos.",
-    footnote: "Prices may change. Last checked: TO CONFIRM.",
+    footnote: "Prices may change.", // TO CONFIRM: add a "last checked" date once the owner confirms the menu
     askTitle: "Also on our table, ask for today's price",
     askLine: "Wala pa rito ang presyo? Tanungin si barista sa counter.",
     railLabel: "Photos of dishes",

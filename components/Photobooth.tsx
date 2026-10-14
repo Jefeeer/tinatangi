@@ -27,6 +27,7 @@ export function Photobooth() {
     <div className="grid items-center gap-8 md:grid-cols-2 md:gap-14">
       <button
         type="button"
+        data-reveal="photo"
         onClick={toggle}
         aria-label={shown ? pb.buttonAgain : pb.button}
         className="relative block aspect-[4/5] w-full max-w-[460px] overflow-hidden rounded-card bg-roast text-left active:brightness-90"
@@ -48,7 +49,7 @@ export function Photobooth() {
         <span className="flash" data-fire={fire} aria-hidden="true" />
       </button>
 
-      <div>
+      <div data-reveal>
         <h3 className="t-h3">{pb.h3}</h3>
         <p className="mt-3 max-w-[40ch] text-ink-on-dark/90">{pb.body}</p>
         <button type="button" onClick={toggle} className="btn btn-lg mt-6">
