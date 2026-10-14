@@ -86,10 +86,10 @@ export function Menu() {
 
         <DragScroll role="region" aria-label={copy.menu.railLabel} tabIndex={0} className="rail rail-fade -mx-4 mt-14 px-4 pb-6 md:-mx-8 md:gap-10 md:px-8">
           {galleryLayout.plateRail.map((p) => (
-            <figure key={p.id} data-reveal="pop" className="plate-fig w-[200px] md:w-[270px]">
+            <figure key={p.id} data-reveal="pop" className="plate-fig w-[200px] md:w-[230px] xl:w-[240px]">
               <div className="plate-rim">
                 <div className="relative aspect-square overflow-hidden rounded-full bg-latte">
-                  <Photo photo={p} sizes="(min-width:768px) 240px, 172px" />
+                  <Photo photo={p} sizes="(min-width:768px) 210px, 172px" />
                 </div>
               </div>
               <figcaption data-reveal className="t-small mt-4 max-w-[26ch] text-espresso/85">{p.caption}</figcaption>
