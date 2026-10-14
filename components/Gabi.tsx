@@ -11,7 +11,7 @@ export function Gabi() {
     <section
       id="gabi"
       aria-labelledby="gabi-h"
-      className="seam on-dark relative bg-gradient-to-b from-fern to-night pb-24 pt-36 text-ink-on-dark md:pb-36 md:pt-56"
+      className="seam on-dark relative bg-gradient-to-b from-fern to-night pb-20 pt-28 text-ink-on-dark md:pb-32 md:pt-44"
       style={{ ["--from" as string]: "var(--color-golden)", ["--to" as string]: "var(--color-fern)" }}
     >
       <FairyLights count={36} strings={3} seed={3} className="z-0" />

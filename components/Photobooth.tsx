@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { galleryLayout, photos } from "@/content/gallery";
-import { copy } from "@/content/site";
+import { copy, site } from "@/content/site";
 import { Photo } from "./Photo";
 
 /** Tap the button or the photo: white flash, then the sign swaps to a 3-frame photo strip. Second tap resets. */
@@ -29,16 +29,17 @@ export function Photobooth() {
         type="button"
         onClick={toggle}
         aria-label={shown ? pb.buttonAgain : pb.button}
-        className="relative block aspect-[4/5] w-full max-w-[460px] overflow-hidden rounded-[6px] bg-roast text-left"
+        className="relative block aspect-[4/5] w-full max-w-[460px] overflow-hidden rounded-card bg-roast text-left active:brightness-90"
       >
         {shown ? (
           <div className="absolute inset-0 grid place-items-center bg-latte">
-            <div className="flex h-[92%] -rotate-2 flex-col gap-2 bg-plate p-2.5 shadow-[0_18px_40px_rgba(0,0,0,0.35)]">
+            <div className="strip-drop flex h-[92%] flex-col gap-2 bg-plate p-2.5 shadow-lift">
               {galleryLayout.photoStrip.map((p) => (
                 <div key={p.id} className="relative aspect-square flex-1 overflow-hidden bg-roast">
                   <Photo photo={p} alt="" sizes="160px" />
                 </div>
               ))}
+              <p className="pt-0.5 text-center text-[0.9375rem] font-bold leading-none text-espresso whitespace-nowrap">{site.name}</p>
             </div>
           </div>
         ) : (

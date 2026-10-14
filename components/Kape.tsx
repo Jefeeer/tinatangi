@@ -26,7 +26,7 @@ export function Kape() {
     <section
       id="kape"
       aria-labelledby="kape-h"
-      className="seam on-light bg-sunwash pb-16 pt-32 text-espresso md:pb-20 md:pt-48"
+      className="seam on-light bg-sunwash pb-10 pt-24 text-espresso md:pb-24 md:pt-40"
       style={{ ["--from" as string]: "var(--color-night)", ["--to" as string]: "var(--color-sunwash)" }}
     >
       <div className="mx-auto grid max-w-7xl gap-x-16 gap-y-10 px-4 md:px-8 lg:grid-cols-[minmax(0,460px)_1fr]">
@@ -39,7 +39,7 @@ export function Kape() {
         </div>
 
         <figure className="order-2 lg:col-start-1 lg:row-span-2 lg:row-start-1">
-          <div className="relative aspect-[3/4] overflow-hidden rounded-[6px] bg-latte">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-card bg-latte">
             <Photo photo={frappe} sizes="(min-width:1024px) 460px, 100vw" />
           </div>
           <figcaption className="t-small mt-3 text-espresso/80">{frappe.caption}</figcaption>
@@ -47,7 +47,7 @@ export function Kape() {
 
         <div className="order-3 flex flex-col gap-10 lg:col-start-2 lg:row-start-2 lg:flex-row-reverse lg:items-start">
           <figure className="ml-auto w-[70%] lg:mt-20 lg:w-[230px] lg:shrink-0">
-            <div className="relative aspect-[3/4] overflow-hidden rounded-[6px] bg-latte">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-card bg-latte">
               <Photo photo={cheesecake} sizes="(min-width:1024px) 230px, 70vw" />
             </div>
             <figcaption className="t-small mt-3 text-espresso/80">{cheesecake.caption}</figcaption>

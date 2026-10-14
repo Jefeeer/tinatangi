@@ -9,7 +9,7 @@ export function Hardin() {
     <section
       id="hardin"
       aria-labelledby="hardin-h"
-      className="seam on-light on-golden relative bg-golden pb-28 pt-32 text-espresso md:pb-40 md:pt-48"
+      className="seam on-light on-golden relative bg-golden pb-16 pt-24 text-espresso md:pb-32 md:pt-40"
       style={{ ["--from" as string]: "var(--color-plate)", ["--to" as string]: "var(--color-golden)" }}
     >
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 md:px-8 lg:grid-cols-12 lg:gap-16">
@@ -17,7 +17,7 @@ export function Hardin() {
           photo={photos.duskCounter}
           sizes="(min-width:1024px) 700px, 100vw"
           position="6% 50%"
-          className="aspect-[4/5] rounded-[6px] bg-roast lg:col-span-7 lg:aspect-[4/5]"
+          className="aspect-[4/5] rounded-card bg-roast lg:col-span-7 lg:aspect-[6/7]"
         />
         <div className="lg:col-span-5">
           <p className="time-tag">{copy.hardin.time}</p>

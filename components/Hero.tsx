@@ -5,10 +5,11 @@ import { useMotionValueEvent, useScroll } from "motion/react";
 import { photos } from "@/content/gallery";
 import { copy, site } from "@/content/site";
 import { clamp } from "@/lib/day";
+import { nb } from "@/lib/text";
 import { Baybayin } from "./Baybayin";
 import { Photo } from "./Photo";
 
-const WIPE_END = 0.85; // fraction of the sticky travel at which the circle has covered the stage
+const WIPE_END = 0.9; // fraction of the sticky travel at which the circle has covered the stage
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -23,6 +24,7 @@ export function Hero() {
     const t = clamp(p / WIPE_END);
     const ring = clamp(Math.min(p / 0.08, (WIPE_END - p) / 0.15));
     el.style.setProperty("--r", `${(reach.current * t).toFixed(1)}px`);
+    el.style.setProperty("--t", t.toFixed(3));
     el.style.setProperty("--ring", ring.toFixed(3));
     el.style.setProperty("--chip-night", clamp((p - 0.3) / 0.3).toFixed(3));
   };
@@ -46,10 +48,15 @@ export function Hero() {
     <section id="hero" ref={ref} className="hero on-dark relative" aria-label="Welcome">
       <div className="sticky top-0 h-svh overflow-hidden bg-night text-ink-on-dark">
         <div className="hero-in absolute inset-0">
-          <Photo photo={photos.facadeDay} alt={copy.hero.morningAlt} sizes="100vw" preload className="object-[62%_45%] md:object-[50%_40%]" />
+          <div className="hero-a absolute inset-0">
+            <Photo photo={photos.facadeDay} alt={copy.hero.morningAlt} sizes="100vw" preload className="object-[62%_45%] md:object-[50%_40%]" />
+          </div>
+          <div className="hero-dim absolute inset-0" aria-hidden="true" />
         </div>
-        <div className="hero-b absolute inset-0">
-          <Photo photo={photos.duskCounter} alt={copy.hero.nightAlt} sizes="100vw" preload className="object-[50%_55%]" />
+        <div className="hero-mask absolute inset-0">
+          <div className="hero-b absolute inset-0">
+            <Photo photo={photos.duskCounter} alt={copy.hero.nightAlt} sizes="100vw" preload className="object-[50%_55%]" />
+          </div>
         </div>
         <div className="hero-ring absolute inset-0" aria-hidden="true" />
         <div className="absolute inset-0 bg-gradient-to-t from-espresso/90 via-espresso/45 to-transparent to-55%" aria-hidden="true" />
@@ -63,7 +70,7 @@ export function Hero() {
               </span>
             ))}
           </h1>
-          <p className="t-lead max-w-[46ch] text-ink-on-dark">{copy.hero.lead}</p>
+          <p className="t-lead max-w-[46ch] text-ink-on-dark">{nb(copy.hero.lead)}</p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
             <a href={site.links.directions} target="_blank" rel="noopener noreferrer" className="btn btn-lg">
               {copy.buttons.directions}

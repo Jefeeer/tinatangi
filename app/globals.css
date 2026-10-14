@@ -22,6 +22,11 @@
   --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
 
   --ease-rise: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* One radius and two shadows for every panel, photo and card. Pills stay pills. */
+  --radius-card: 6px;
+  --shadow-paper: 0 30px 80px rgba(42, 20, 12, 0.12);
+  --shadow-lift: 0 18px 40px rgba(0, 0, 0, 0.32);
 }
 
 html {
@@ -115,6 +120,12 @@ body {
 .t-lead {
   font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
   line-height: 1.55;
+  text-wrap: pretty;
+}
+.t-h1,
+.t-h2,
+.t-h3 {
+  text-wrap: balance;
 }
 .t-small {
   font-size: 0.9375rem;
@@ -161,10 +172,18 @@ body {
   text-decoration: none;
   background: var(--btn-bg, var(--color-marigold));
   color: var(--btn-fg, var(--color-espresso));
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.25s, transform 0.15s var(--ease-rise);
 }
 .btn:hover {
   background: var(--btn-hover, var(--color-glow));
+}
+.on-dark .btn:not(.btn-ghost):hover,
+.on-dark .btn:not(.btn-ghost):focus-visible {
+  /* a lantern coming on */
+  box-shadow: 0 0 0 6px rgba(242, 163, 27, 0.22), 0 0 28px 4px rgba(255, 217, 138, 0.35);
+}
+.btn:active {
+  transform: scale(0.97);
 }
 .btn-lg {
   min-height: 56px;
@@ -199,14 +218,15 @@ body {
   content: "";
   position: absolute;
   inset: 0 0 auto 0;
-  height: 96px;
+  height: 112px;
   background: linear-gradient(var(--from), var(--to));
+  background: linear-gradient(in oklab, var(--from), var(--to));
   z-index: -1;
   pointer-events: none;
 }
 @media (min-width: 768px) {
   .seam::before {
-    height: 160px;
+    height: 144px;
   }
 }
 
@@ -303,11 +323,30 @@ html[data-section]:not([data-section="hero"]):not([data-section="bisita"]) .bott
 
 /* Hero wipe: dusk (B) revealed by a growing circle from the bottom centre */
 .hero {
-  height: 220svh;
+  /* 100svh pinned + 100svh of wipe: the wipe ends just before the stage lets go, so scroll is never dead */
+  height: 200svh;
   --r: 0px;
   --ring: 0;
+  --t: 0;
+}
+.hero-a,
+.hero-b {
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+.hero-a {
+  transform: scale(calc(1 + var(--t) * 0.05));
 }
 .hero-b {
+  transform: scale(calc(1.06 - var(--t) * 0.06));
+}
+/* The morning grows dim as the dusk spreads over it */
+.hero-dim {
+  background: var(--color-night);
+  opacity: calc(var(--t) * 0.4);
+}
+/* the mask lives on a wrapper so the photo inside can scale on its own */
+.hero-mask {
   -webkit-mask-image: radial-gradient(circle at 50% 100%, #000 calc(var(--r) - 48px), transparent var(--r));
   mask-image: radial-gradient(circle at 50% 100%, #000 calc(var(--r) - 48px), transparent var(--r));
 }
@@ -408,10 +447,28 @@ html[data-section]:not([data-section="hero"]):not([data-section="bisita"]) .bott
   padding: 14px;
   background: url("/brand/plate-tile.svg") center / 96px 96px;
   box-shadow: 0 14px 40px rgba(42, 20, 12, 0.18);
+  transition: transform 0.7s var(--ease-rise);
+}
+/* a plate gets turned toward you when you look at it */
+.plate-fig:hover .plate-rim,
+.plate-fig:focus-within .plate-rim,
+.plate-fig:active .plate-rim {
+  transform: rotate(-7deg);
 }
 .plate-edge {
   border: 14px solid transparent;
   border-image: url("/brand/plate-tile.svg") 28 round;
+}
+
+/* Menu rows: a quiet delft wash under the dish you are reading */
+.menu-row {
+  margin-inline: -10px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+.menu-row:hover {
+  background: rgb(31 63 168 / 0.07);
 }
 
 /* Rails: native scroll-snap, hidden scrollbar */
@@ -438,6 +495,39 @@ html[data-section]:not([data-section="hero"]):not([data-section="bisita"]) .bott
 .rail > * {
   scroll-snap-align: start;
   flex: none;
+}
+
+/* Soft fade where a rail runs off the page edge, so it never looks sliced */
+.rail-fade {
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 64px), transparent);
+  mask-image: linear-gradient(90deg, #000 calc(100% - 64px), transparent);
+}
+
+/* Photobooth: the strip slides out of the machine after the flash */
+.strip-drop {
+  transform: rotate(-2deg);
+  animation: stripDrop 0.7s 0.18s var(--ease-rise) both;
+}
+@keyframes stripDrop {
+  from {
+    transform: translateY(-110%) rotate(-2deg);
+  }
+  to {
+    transform: translateY(0) rotate(-2deg);
+  }
+}
+
+/* Mobile menu opens as a circle from the hamburger: the same move as the hero wipe */
+.menu-open {
+  animation: menuOpen 0.55s var(--ease-rise) both;
+}
+@keyframes menuOpen {
+  from {
+    clip-path: circle(0px at calc(100% - 36px) 40px);
+  }
+  to {
+    clip-path: circle(160vmax at calc(100% - 36px) 40px);
+  }
 }
 
 /* Photobooth flash */
@@ -478,8 +568,21 @@ html[data-section]:not([data-section="hero"]):not([data-section="bisita"]) .bott
     height: 100svh;
     --r: 3000px;
   }
-  .hero-ring {
+  .hero-ring,
+  .hero-dim {
     display: none;
+  }
+  .hero-a,
+  .hero-b {
+    transform: none;
+    will-change: auto;
+  }
+  .strip-drop,
+  .menu-open {
+    animation: none;
+  }
+  .plate-rim {
+    transition: none;
   }
   .hero-chip-night {
     opacity: 1;

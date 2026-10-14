@@ -1,3 +1,4 @@
+import { nb } from "@/lib/text";
 import { copy, messageUrl, ratingLine, site } from "@/content/site";
 import { FairyLights } from "./FairyLights";
 import { MapCard } from "./MapCard";
@@ -28,7 +29,7 @@ export function Bisita() {
           <div className="flex flex-col gap-10">
             <div>
               <h3 className="t-h3">Hours</h3>
-              <p className="mt-2">{b.hoursLine}</p>
+              <p className="mt-2">{nb(b.hoursLine)}</p>
             </div>
             <div>
               <h3 className="t-h3">Address</h3>

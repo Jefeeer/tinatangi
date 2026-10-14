@@ -22,7 +22,7 @@ export function Photo({ photo, sizes, className = "", preload = false, style, al
       sizes={sizes}
       preload={preload}
       className={`h-full w-full object-cover ${className}`}
-      style={style}
+      style={photo.focus || style ? { objectPosition: photo.focus, ...style } : undefined}
     />
   );
 }

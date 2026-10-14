@@ -9,6 +9,8 @@ export type Photo = {
   height: number;
   alt: string;
   caption?: string;
+  /** CSS object-position for this placement (art direction). */
+  focus?: string;
 };
 
 export const photos = {
@@ -25,10 +27,15 @@ export const photos = {
   nachos: { id: "nachos", src: "/photos/nachos.jpg", width: 810, height: 1080, alt: "Nachos on a blue-and-white plate", caption: "Nachos" },
 } satisfies Record<string, Photo>;
 
+// The dusk photo appears in the hero, in Hardin and in the night rail. Each placement crops a different part of it.
+const deckCrop: Photo = { ...photos.duskCounter, id: "dusk-deck", focus: "86% 38%", caption: "The rooftop deck under the lights" };
+const counterSquare: Photo = { ...photos.duskCounter, id: "dusk-counter-square", focus: "46% 62%" };
+const frappeStrip: Photo = { ...photos.frappe, id: "frappe-strip", focus: "50% 70%" };
+
 /** Which photos appear in which block (ordered). */
 export const galleryLayout = {
   kape: [photos.frappe, photos.cheesecake],
   plateRail: [photos.riceBowl, photos.mushroomSteak, photos.salad, photos.nachos, photos.milkTea],
-  nightRail: [photos.garden, photos.icedCoffee, photos.duskCounter, photos.milkTea],
-  photoStrip: [photos.frappe, photos.garden, photos.duskCounter],
+  nightRail: [photos.garden, photos.icedCoffee, deckCrop, photos.milkTea],
+  photoStrip: [frappeStrip, photos.garden, counterSquare],
 } as const;

@@ -4,7 +4,7 @@ import { copy, messageUrl, site } from "@/content/site";
 export function BottomBar() {
   return (
     <div
-      className="bottom-bar on-dark fixed inset-x-0 bottom-0 z-40 flex gap-3 bg-night/95 px-4 pt-3 backdrop-blur md:hidden"
+      className="bottom-bar on-dark fixed inset-x-0 bottom-0 z-40 flex gap-3 border-t border-ink-on-dark/10 bg-night/95 px-4 pt-3 shadow-[0_-12px_30px_rgba(0,0,0,0.35)] backdrop-blur md:hidden"
       style={{ paddingBottom: "max(12px, env(safe-area-inset-bottom))" }}
     >
       <a href={site.links.directions} target="_blank" rel="noopener noreferrer" className="btn btn-lg flex-[1.4]">
