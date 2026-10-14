@@ -556,41 +556,35 @@ html[data-section]:not([data-section="hero"]):not([data-section="bisita"]) .bott
   flex: none;
 }
 
-/* Gabi photo marquee: two copies of the set, the track slides by one set (-50%) and loops */
+/* Gabi photo marquee: two copies of the set; NightRail moves the track (auto-glide + drag) and wraps by one set */
 .marquee {
   overflow: hidden;
+  touch-action: pan-y;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee var(--marquee-dur, 36s) linear infinite;
+  will-change: transform;
 }
 .marquee-item {
   flex: none;
   padding-inline-end: 16px;
 }
-.marquee:hover .marquee-track,
-.marquee:focus-within .marquee-track {
-  animation-play-state: paused;
+
+/* Rails a mouse can drag */
+.drag-scroll {
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
 }
-@keyframes marquee {
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
+.drag-scroll[data-dragging] {
+  cursor: grabbing;
+  scroll-snap-type: none;
 }
-@media (prefers-reduced-motion: reduce) {
-  .marquee {
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .marquee-track {
-    animation: none;
-  }
-  .marquee-item[aria-hidden] {
-    display: none;
-  }
+.drag-scroll img {
+  -webkit-user-drag: none;
 }
 
 /* Soft fade where a rail runs off the page edge, so it never looks sliced */

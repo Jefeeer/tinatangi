@@ -44,3 +44,6 @@ next-env.d.ts
 /.screens/
 !.env.example
 .dev.log
+
+# proposal drafts (client pricing; kept out of the repo)
+/proposal/

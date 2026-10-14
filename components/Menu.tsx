@@ -1,6 +1,7 @@
 import { askInStore, menuCategories, menuColumns } from "@/content/menu";
 import { galleryLayout } from "@/content/gallery";
 import { copy } from "@/content/site";
+import { DragScroll } from "./DragScroll";
 import { MenuChips } from "./MenuChips";
 import { Photo } from "./Photo";
 import { Rise } from "./Rise";
@@ -83,7 +84,7 @@ export function Menu() {
           </ul>
         </div>
 
-        <div role="region" aria-label={copy.menu.railLabel} tabIndex={0} className="rail rail-fade -mx-4 mt-14 px-4 pb-6 md:-mx-8 md:gap-10 md:px-8">
+        <DragScroll role="region" aria-label={copy.menu.railLabel} tabIndex={0} className="rail rail-fade -mx-4 mt-14 px-4 pb-6 md:-mx-8 md:gap-10 md:px-8">
           {galleryLayout.plateRail.map((p) => (
             <figure key={p.id} data-reveal="pop" className="plate-fig w-[200px] md:w-[270px]">
               <div className="plate-rim">
@@ -94,7 +95,7 @@ export function Menu() {
               <figcaption data-reveal className="t-small mt-4 max-w-[26ch] text-espresso/85">{p.caption}</figcaption>
             </figure>
           ))}
-        </div>
+        </DragScroll>
       </div>
     </section>
   );
