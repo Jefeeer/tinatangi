@@ -58,7 +58,7 @@ export const copy = {
   meta: {
     title: "Tinatangi Cafe | Garden cafe in Salawag, Dasmariñas, Cavite",
     description:
-      "Coffee, food and fairy lights in a big garden in Dasmariñas. Open daily 7 AM to 12 MN. Pet-friendly, with parking, a photobooth and a bakery.",
+      "Pet-friendly garden cafe in Salawag, Dasmariñas, Cavite. Coffee, food and fairy lights. Open daily 7 AM to 12 MN. Big parking, photobooth, bakery.",
   },
   nav: [
     { id: "kape", label: "Kape" },
@@ -74,7 +74,7 @@ export const copy = {
     chipNight: "Hanggang 12:00 MN",
     cue: "Mag-scroll para gumabi",
     morningAlt: "Ribbed-wood facade of Tinatangi Cafe in morning sun, with palms and potted plants",
-    nightAlt: "The two-storey open counter and rooftop deck under trees wrapped in fairy lights at dusk",
+    nightAlt: "Tinatangi Cafe's two-storey open counter and rooftop deck under trees wrapped in fairy lights at dusk",
   },
   kape: {
     time: "7:00 AM",

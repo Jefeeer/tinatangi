@@ -12,9 +12,9 @@ export type Photo = {
 };
 
 export const photos = {
-  duskCounter: { id: "dusk-counter", src: "/photos/dusk-counter.jpg", width: 1440, height: 1080, alt: "The two-storey open counter and rooftop deck under trees wrapped in fairy lights at dusk", caption: "Counter and rooftop deck under the lights" },
+  duskCounter: { id: "dusk-counter", src: "/photos/dusk-counter.jpg", width: 1440, height: 1080, alt: "Tinatangi Cafe's two-storey open counter and rooftop deck under trees wrapped in fairy lights at dusk", caption: "Counter and rooftop deck under the lights" },
   facadeDay: { id: "facade-day", src: "/photos/facade-day.jpg", width: 1080, height: 1080, alt: "Ribbed-wood facade of Tinatangi Cafe in daylight with the photobooth sign", caption: "The facade by day" },
-  garden: { id: "garden", src: "/photos/garden.jpg", width: 810, height: 1080, alt: "Alfresco area at night with royal-blue umbrellas, bamboo with fairy lights and checkered paving", caption: "Bamboo, blue umbrellas and checkered floor" },
+  garden: { id: "garden", src: "/photos/garden.jpg", width: 810, height: 1080, alt: "Alfresco garden at Tinatangi Cafe at night with royal-blue umbrellas, bamboo with fairy lights and checkered paving", caption: "Bamboo, blue umbrellas and checkered floor" },
   icedCoffee: { id: "iced-coffee", src: "/photos/iced-coffee.jpg", width: 810, height: 1080, alt: "Iced caramel coffee held in front of black trusses and chandeliers", caption: "Indoors: black trusses and chandeliers" },
   frappe: { id: "frappe", src: "/photos/frappe.jpg", width: 810, height: 1080, alt: "Four frappes in Tinatangi Cafe cups, being cheered together", caption: "Frappes in our cups" },
   cheesecake: { id: "cheesecake", src: "/photos/cheesecake.jpg", width: 810, height: 1080, alt: "Oreo cheesecake and a frappe in front of a bookshelf", caption: "Cheesecake by the bookshelf" },
